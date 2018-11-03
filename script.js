@@ -34,10 +34,11 @@ var Counter = React.createClass({
 
     shouldComponentUpdate: function(nextProps, nextState){
         console.log('shouldComponentUpdate: za pomocą tej metody można sterować renderowaniem komponentu np. jeśli metoda ta zwróci false to wszystkie kolejne metody cyklu życia zostaną anulowane. Metoda ta przyjmuje dwa parametry: nextProps i nextState. \n');
+        return true;
     },
 
     componentWillUpdate: function(){
-        console, log('componentWillUpdate: ma podobne przeznaczenie co metoda  componentWillMount. Wywoływana jest zaraz przed metodą render. Nie powinna zawierać wywoływania this.setState. Gdyż nie spowoduje to kolejnego renderowania.\n');
+        console.log('componentWillUpdate: ma podobne przeznaczenie co metoda  componentWillMount. Wywoływana jest zaraz przed metodą render. Nie powinna zawierać wywoływania this.setState. Gdyż nie spowoduje to kolejnego renderowania.\n');
     },
     componentDidUpdate: function (prevProps, prevState){
         console.log('componentDidUpdate: jest ona odpowiednikiem metody componentDidMount() z etapu montowania. Przyjmuje parametry prevProps oraz prevState, które zawierają poprzednią wartość obiektu this.props oraz stanu komponentu. Jest to miejsce w którym możemy aktualizować stan komponentu. \n ')
@@ -45,7 +46,8 @@ var Counter = React.createClass({
     
     //faza usuwania komponentu
     componentWillUnmount: function(){
-        console, log('componentWillUnmount: nie przyjmuje parametrów i służy do wykonywania zadań czyszczenia.\n');
+        console.log('componentWillUnmount: nie przyjmuje parametrów i służy do wykonywania zadań czyszczenia.\n');
+        
     },
 
     increment: function () {
@@ -70,71 +72,15 @@ var Counter = React.createClass({
     }
 });
 
-var SecondCounter = React.createClass({
-    getInitialState: function () {
-        return {
-            counter: 0
-        }
-    },
 
-    increment: function () {
-        this.setState({
-            counter: this.state.counter + 1  
-        });
-    },
-    decrement: function () {
-        this.setState({
-            counter: this.state.counter - 1
-        })
-    },
-
-    render: function () {
-        return (
-            React.createElement('div', { className: 'box'},            
-                React.createElement('button', { className: 'item', onClick: this.increment }, 'Increment'),
-            React.createElement('span', {}, 'Licznik ' + this.state.counter),            
-                React.createElement('button', { className: 'item', onClick: this.decrement }, 'Decrement'),
-            )
-        )
-    }
-});
-
-var ThirdCounter = React.createClass({
-    getInitialState: function () {
-        return {
-            counter: 0
-        }
-    },
-
-    increment: function () {
-        this.setState({
-            counter: this.state.counter + 1  
-        });
-    },
-    decrement: function () {
-        this.setState({
-            counter: this.state.counter - 1
-        })
-    },
-
-    render: function () {
-        return (
-            React.createElement('div', { className: 'box'},            
-                React.createElement('button', { className: 'item', onClick: this.increment }, 'Increment'),
-                React.createElement('span', {}, 'Licznik ' + this.state.counter),
-                React.createElement('button', { className: 'item', onClick: this.decrement }, 'Decrement'),
-            )
-        )
-    }
-});
 
 var App = React.createClass({
     render: function() {
         return (
             React.createElement('div', {className: 'container'}, 
                     React.createElement(Counter, {}, ),
-                    React.createElement(SecondCounter, {}, ),
-                    React.createElement(ThirdCounter, {}, ),
+                    React.createElement(Counter, {}, ),
+                    React.createElement(Counter, {}, ),
             )    
         )                
     }
